@@ -4,7 +4,6 @@ from typing import List, Optional
 from pydantic import BaseModel
 
 
-
 class MovieBase(BaseModel):
     name: str
     date: date

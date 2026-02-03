@@ -10,12 +10,15 @@ router = APIRouter()
 
 
 @router.get("/movies/", response_model=MovieListResponseSchema)
-async def get_movies(db: AsyncSession = Depends(get_db), page: int = Query(1, ge=1), per_page: int = Query(10, ge=1, le=20)):
+async def get_movies(
+        db: AsyncSession = Depends(get_db),
+        page: int = Query(1, ge=1),
+        per_page: int = Query(10, ge=1, le=20)):
     result = await db.execute(select(MovieModel).limit(per_page).offset((page - 1) * per_page))
     movies = result.scalars().all()
 
     if not movies:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail= "No movies found.")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No movies found.")
 
     return movies
 
