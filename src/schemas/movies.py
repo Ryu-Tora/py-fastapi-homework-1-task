@@ -10,7 +10,7 @@ class MovieBase(BaseModel):
     score: float
     genre: str
     overview: str
-    crew: list
+    crew: str
     orig_title: str
     status: str
     orig_lang: str
