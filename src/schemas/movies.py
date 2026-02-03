@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List, Optional
+from typing import List
 
 from pydantic import BaseModel
 
@@ -32,7 +32,7 @@ class MovieDetailResponseSchema(MovieBase):
 
 class MovieListResponseSchema(BaseModel):
     movies: List[MovieDetailResponseSchema]
-    prev_page: Optional[int]
-    next_page: Optional[int]
+    prev_page: str
+    next_page: str
     total_pages: int
     total_items: int
