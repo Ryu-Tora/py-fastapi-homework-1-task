@@ -1,7 +1,7 @@
 import math
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from httpx import Request, request
+from fastapi import Request
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
@@ -21,6 +21,7 @@ def build_page_url(request: Request, page: int, per_page: int) -> str:
 
 @router.get("/movies/", response_model=MovieListResponseSchema)
 async def get_movies(
+        request: Request,
         db: AsyncSession = Depends(get_db),
         page: int = Query(1, ge=1),
         per_page: int = Query(10, ge=1, le=20)
